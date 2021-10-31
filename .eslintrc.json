@@ -12,6 +12,7 @@
         "node": true
     },
     "parser": "@babel/eslint-parser",
+    "ignorePatterns": ["build", "node_modules"],
     "rules": {
         "indent": [
             "error",
