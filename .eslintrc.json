@@ -1,0 +1,32 @@
+{
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "plugins": [
+        "react"
+    ],
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "node": true
+    },
+    "parser": "@babel/eslint-parser",
+    "rules": {
+        "indent": [
+            "error",
+            "tab",
+            {"SwitchCase" : 1}
+        ],
+        "no-console": "off",
+        "semi": ["error", "always"]
+    },
+    "globals": {
+        "console": false
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    }
+}
