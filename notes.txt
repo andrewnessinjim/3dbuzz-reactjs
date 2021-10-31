@@ -1,3 +1,4 @@
 Commands executed in the command line for setting up the project
 
 1) npm init
+2) git init & commit
