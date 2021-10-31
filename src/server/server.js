@@ -6,14 +6,16 @@ const obj2 = {...obj, blegh: 2};
 console.log(obj2);
 
 class AppComponent {
-
+	static PropTypes = {
+		blegh: "PropTypes!"
+	}
 }
 
 function fail() {
-	throw new Error("BLEGH");
+	throw new Error("BLEGH BLEGH");
 }
 
-fail();
+//fail();
 
 switch (blegh) {
 	case 1:
