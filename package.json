@@ -1,0 +1,12 @@
+{
+  "name": "cards",
+  "version": "1.0.0",
+  "description": "Cards against humanity app by Nelson LaQuet",
+  "main": "server.js",
+  "scripts": {
+    "test": "node ./tests.js",
+    "start": "node ./server.js"
+  },
+  "author": "Andrew Nessin",
+  "license": "ISC"
+}
