@@ -9,7 +9,8 @@
     "env": {
         "browser": true,
         "commonjs": true,
-        "node": true
+        "node": true,
+        "jasmine": true
     },
     "parser": "@babel/eslint-parser",
     "ignorePatterns": ["build", "node_modules"],
