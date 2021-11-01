@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "express": "4.17.1",
+    "font-awesome": "^4.7.0",
     "lodash": "^4.17.21",
     "pug": "3.0.2",
     "source-map-support": "0.5.20"
