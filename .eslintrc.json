@@ -24,7 +24,10 @@
         "semi": ["error", "always"]
     },
     "globals": {
-        "console": false
+        "console": false,
+        "process": false,
+        "IS_DEVELOPMENT": false,
+        "IS_PRODUCTION": false
     },
     "settings": {
         "react": {
