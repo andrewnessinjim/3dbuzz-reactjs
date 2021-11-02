@@ -2,6 +2,7 @@ import gulp from "gulp";
 import path from "path";
 import rimraf from "rimraf";
 import child_process from "child_process";
+import chalk from "chalk";
 
 import webpackProdConfig from "./webpack.config.prod";
 import webpackDevConfig from "./webpack.config.dev";
@@ -17,14 +18,7 @@ gulp.task("server:clean", done => {
 gulp.task("server:build",
 	gulp.series(
 		"server:clean",
-		serverBuild
-	));
-
-gulp.task(
-	"server:watch",
-	gulp.series(
-		"server:build",
-		serverWatch
+		buildServer
 	));
 
 gulp.task(
@@ -32,8 +26,8 @@ gulp.task(
 	gulp.series(
 		"server:build",
 		gulp.parallel(
-			serverWatch,
-			serverRun
+			watchServer,
+			runServer
 		)
 	)
 );
@@ -42,7 +36,7 @@ gulp.task(
 	"server:test",
 	gulp.series(
 		"server:build",
-		serverTests
+		testServer
 	)
 );
 
@@ -51,13 +45,13 @@ gulp.task(
 	gulp.series(
 		"server:build",
 		gulp.parallel(
-			serverWatch,
-			serverTestsWatch
+			watchServer,
+			watchServerTests
 		)
 	)
 );
 
-function serverBuild() {
+function buildServer() {
 	return gulp.src("./src/server/**/*.js")
 		.pipe($.changed("./build"))
 		.pipe($.sourcemaps.init())
@@ -66,11 +60,11 @@ function serverBuild() {
 		.pipe(gulp.dest("./build"));
 }
 
-function serverWatch() {
-	return gulp.watch("./src/server/**/*.js", gulp.series(serverBuild));
+function watchServer() {
+	return gulp.watch("./src/server/**/*.js", gulp.series(buildServer));
 }
 
-function serverRun() {
+function runServer() {
 	return $.nodemon({
 		script: "./server.js",
 		watch: "build",
@@ -78,7 +72,7 @@ function serverRun() {
 	});
 }
 
-function serverTests(done) {
+function testServer(done) {
 	child_process.exec("node ./tests.js", (err, stdout, stderr) => {
 		console.log(stdout);
 		console.error(stderr);
@@ -91,7 +85,7 @@ function serverTests(done) {
 	});
 }
 
-function serverTestsWatch() {
+function watchServerTests() {
 	return $.nodemon({
 		script: "./tests.js",
 		watch: "build"
@@ -117,8 +111,10 @@ gulp.task("client:dev", watchClient);
 function buildClient(done) {
 	let webpackConfig;
 	if(process.env.NODE_ENV === "production") {
+		console.log(chalk.bgRed.white("Using webpack PRODUCTION config"));
 		webpackConfig = webpackProdConfig;
 	} else {
+		console.log(chalk.bgRed.white("Using webpack DEVELOPMENT config"));
 		webpackConfig = webpackDevConfig;
 	}
 
