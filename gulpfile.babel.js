@@ -6,6 +6,8 @@ import child_process from "child_process";
 import webpackProdConfig from "./webpack.config.prod";
 import webpackDevConfig from "./webpack.config.dev";
 import { webpack } from "webpack";
+import WebpackDevServer from "webpack-dev-server";
+
 const $ = require("gulp-load-plugins")();
 
 gulp.task("server:clean", done => {
@@ -110,6 +112,7 @@ const consoleStats = {
 };
 
 gulp.task("client:build", buildClient);
+gulp.task("client:dev", watchClient);
 
 function buildClient(done) {
 	let webpackConfig;
@@ -128,4 +131,18 @@ function buildClient(done) {
 		console.log(stats.toString(consoleStats));
 		done();
 	});
+}
+
+function watchClient() {
+	const compiler = webpack(webpackDevConfig);
+	const server = new WebpackDevServer({
+		hot: true,
+		headers: {
+			"Access-Control-Allow-Origin": "*",
+			"Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+			"Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+		}
+	}, compiler);
+
+	server.start(8080, ()=>{});
 }
