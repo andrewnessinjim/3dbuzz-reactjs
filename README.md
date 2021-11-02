@@ -1,0 +1,2 @@
+# Cards Against Humanity Clone
+Application developed as part of "Production Ready Apps ReactJS" course. It's hosted for free at [https://archive.org/download/3dbuzz-archive](https://archive.org/download/3dbuzz-archive).
