@@ -3,7 +3,9 @@ const path = require("path"),
 	{ CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const vendor = [
-	"lodash"
+	"lodash",
+	"react",
+	"react-dom"
 ];
 
 module.exports = {

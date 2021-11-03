@@ -11,3 +11,4 @@ services:
       - '9229:9229'
     volumes:
       - .:/app/source
+    tty: true
