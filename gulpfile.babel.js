@@ -68,7 +68,8 @@ function runServer() {
 	return $.nodemon({
 		script: "./server.js",
 		watch: "build",
-		ignore: ["**/tests"]
+		ignore: ["**/tests"],
+		nodeArgs: ["--inspect=0.0.0.0:9229"]
 	});
 }
 
