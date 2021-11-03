@@ -142,3 +142,8 @@ function watchClient() {
 
 	server.start(8080, ()=>{});
 }
+
+// -------------------------------------
+// Other Tasks
+gulp.task("dev", gulp.parallel("server:dev", "client:dev"));
+gulp.task("build", gulp.parallel("server:build", "client:build"));
