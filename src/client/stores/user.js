@@ -1,4 +1,4 @@
-import * as A from "../actions";
+//this.stateimport * as A from "../actions";
 
 export default class UserStore {
 	
