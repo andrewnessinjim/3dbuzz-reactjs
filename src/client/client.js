@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 import {BrowserRouter as Router} from "react-router-dom";
 
 import * as A from "./actions";
+import { StoreProvider } from "./lib/component";
 import {Dispatcher} from "shared/dispatcher";
 import createStores from "./stores";
 
@@ -22,9 +23,11 @@ const stores = createStores(services);
 function main() {
 	const routes = require("./routes").default();
 	ReactDOM.render(
-		<Router>
-			{routes}
-		</Router>,
+		<StoreProvider stores={stores} services={services}>
+			<Router>
+				{routes}
+			</Router>
+		</StoreProvider>,
 		document.getElementById("mount"));
 }
 
