@@ -1,15 +1,28 @@
 import "./client.scss";
-import ReactDOM from "react-dom";
 
+import React from "react";
+import ReactDOM from "react-dom";
+import {BrowserRouter as Router} from "react-router-dom";
+
+//------------------------------------
+// Render
 function main() {
 	const routes = require("./routes").default();
-	ReactDOM.render(routes, document.getElementById("mount"));
+	ReactDOM.render(
+		<Router>
+			{routes}
+		</Router>,
+		document.getElementById("mount"));
 }
 
-main();
-
+//------------------------------------
+// Misc
 if (module.hot) {
 	module.hot.accept("./routes", () => {
 		main();
 	});
 }
+
+//------------------------------------
+// Go!
+main();

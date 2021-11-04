@@ -5,7 +5,10 @@ const path = require("path"),
 const vendor = [
 	"lodash",
 	"react",
-	"react-dom"
+	"react-dom",
+	"react-router",
+	"socket.io-client",
+	"rxjs"
 ];
 
 module.exports = {

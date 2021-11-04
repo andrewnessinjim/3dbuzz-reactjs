@@ -21,6 +21,7 @@
             {"SwitchCase" : 1}
         ],
         "no-console": "off",
+        "no-unused-vars": "warn",
         "semi": ["error", "always"]
     },
     "globals": {
