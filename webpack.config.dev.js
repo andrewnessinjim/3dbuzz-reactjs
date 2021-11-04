@@ -4,6 +4,7 @@ const {merge} = require("webpack-merge"),
 
 const webpackDevConfig = merge(common, {
 	mode: "development",
+	devtool: "eval-cheap-module-source-map",
 	entry: {
 		app: { 
 			import:
