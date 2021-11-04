@@ -4,7 +4,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {BrowserRouter as Router} from "react-router-dom";
 
-import * as A from "./actions";
 import { StoreProvider } from "./lib/component";
 import {Dispatcher} from "shared/dispatcher";
 import createStores from "./stores";
