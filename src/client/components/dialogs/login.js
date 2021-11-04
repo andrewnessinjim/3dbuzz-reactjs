@@ -1,4 +1,4 @@
-import "./log.scss";
+import "./login.scss";
 
 import React from "react";
 import * as A from "../../actions";

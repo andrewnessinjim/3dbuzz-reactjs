@@ -3,7 +3,7 @@ import "./app.scss";
 import React from "react";
 import { ContainerBase } from "../lib/component";
 import PropTypes from 'prop-types';
-//import dialogTypes from "./dialogs";
+import dialogTypes from "./dialogs";
 
 class AppContainer extends ContainerBase {
 	static propTypes = {
@@ -11,17 +11,25 @@ class AppContainer extends ContainerBase {
 		Sidebar: PropTypes.func.isRequired
 	}
 
-	componentDidMount() {
+	componentWillMount() {
 		const {stores: {app}} = this.context;
 		this.subscribe(app.dialog$, dialogs => this.setState({dialogs}));
 	}
 
 	render(){
 		const {Main, Sidebar} = this.props;
-		console.log(this.state && this.state.dialogs);
+		const {dialogs} = this.state;
+
+		const dialogStack = dialogs.map(dialog => {
+			const DialogComponent = dialogTypes[dialog.id];
+			return <DialogComponent {...dialog.props} key={dialog.id} />;
+		});
 
 		return (
-			<div className={`c-application`}>
+			<div className={`c-application ${dialogStack.length ? "dialogs-open" : "dialogs-closed"}`}>
+				<div className="dialogs">
+					{dialogStack}
+				</div>
 				<div className="inner">
 					<div className="sidebar">
 						<Sidebar/>
