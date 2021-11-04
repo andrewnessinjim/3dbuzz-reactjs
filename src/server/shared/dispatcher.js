@@ -83,11 +83,14 @@ export class Dispatcher {
 		this._emitBuffer = [];
 		this._inEmit = true;
 
-		if(this._handlers.hasOwnProperty("*"))
-			this.handlers["*"].forEach(h => invokeHandler(action, h));
+		if(this._handlers.hasOwnProperty("*")) {
+			this._handlers["*"].forEach(h => invokeHandler(action, h));
+		}
 
-		if(this._handlers.hasOwnProperty(action.type))
+
+		if(this._handlers.hasOwnProperty(action.type)) {
 			this._handlers[action.type].forEach(h => invokeHandler(action, h));
+		}
 
 		const buffer = this._emitBuffer;
 		this._emitBuffer = [];
