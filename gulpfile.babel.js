@@ -52,7 +52,7 @@ gulp.task(
 );
 
 function buildServer() {
-	return gulp.src("./src/server/**/*.js")
+	return gulp.src(["./src/server/**/*.js","./src/server/**/*.ts"])
 		.pipe($.changed("./build"))
 		.pipe($.sourcemaps.init())
 		.pipe($.babel())
@@ -61,7 +61,7 @@ function buildServer() {
 }
 
 function watchServer() {
-	return gulp.watch("./src/server/**/*.js", gulp.series(buildServer));
+	return gulp.watch(["./src/server/**/*.js","./src/server/**/*.ts"], gulp.series(buildServer));
 }
 
 function runServer() {
