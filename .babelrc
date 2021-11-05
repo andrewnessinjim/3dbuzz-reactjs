@@ -2,7 +2,14 @@
     "presets": [
         "@babel/env",
         "@babel/react",
-        "@babel/preset-typescript"
+        [
+            "@babel/preset-typescript",
+            {
+                "isTSX": true,
+                "allExtensions": true
+            }
+        ]
+        
     ],
     "plugins": [
         "react-hot-loader/babel"

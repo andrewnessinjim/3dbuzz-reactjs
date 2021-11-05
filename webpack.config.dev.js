@@ -9,7 +9,7 @@ const webpackDevConfig = merge(common, {
 		app: { 
 			import:
 			[
-				"./src/client/client.js",
+				"./src/client/client.tsx",
 				"react-hot-loader/patch"
 			],
 			dependOn: "vendor" 
