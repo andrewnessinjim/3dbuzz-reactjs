@@ -2,6 +2,12 @@ import {Component, Children} from "react";
 import PropTypes from "prop-types";
 
 export class StoreProvider extends Component {
+	props: {
+		stores: object
+		services: object
+		children: any
+	}
+
 	static propTypes = {
 		stores: PropTypes.object.isRequired,
 		services: PropTypes.object.isRequired,
@@ -24,6 +30,8 @@ export class StoreProvider extends Component {
 }
 
 export class ContainerBase extends Component {
+	_disposeFunctions: Array<Function>
+
 	static contextTypes = {
 		stores: PropTypes.object.isRequired,
 		services: PropTypes.object.isRequired
