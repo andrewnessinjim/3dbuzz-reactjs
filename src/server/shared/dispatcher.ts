@@ -3,6 +3,11 @@ import _ from "lodash";
 import { Observable } from "rxjs";
 import * as A from "./actions";
 
+export interface Action {
+	type: string,
+	status?: string
+}
+
 export class Dispatcher {
 	constructor(){
 		this._handlers = {};
@@ -62,19 +67,19 @@ export class Dispatcher {
 		});
 	}
 
-	onRequest$(type) {
+	onRequest$(type: string) {
 		return this.on$(type).filter(action => action.status == A.STATUS_REQUEST);
 	}
 
-	onFail$(type) {
+	onFail$(type: string) {
 		return this.on$(type).filter(action => action.status == A.STATUS_FAIL);
 	}
 
-	onSuccess$(type) {
+	onSuccess$(type: string) {
 		return this.on$(type).filter(action => action.status == A.STATUS_SUCCESS);
 	}
 
-	emit(action) {
+	emit(action: Action) {
 		if(this._inEmit) {
 			this._emitBuffer.push(action);
 			return;
@@ -101,19 +106,19 @@ export class Dispatcher {
 		}
 	}
 
-	request(action) {
+	request(action: Action) {
 		this.emit(A.request(action));
 	}
 
-	fail(action, error) {
+	fail(action: Action, error) {
 		this.emit(A.fail(action, error));
 	}
 
-	succeed(action) {
+	succeed(action: Action) {
 		this.emit(A.succeed(action));
 	}
 
-	respond(action, validator) {
+	respond(action: Action, validator) {
 		if(validator.didFail)
 			this.fail(action, validator.message);
 		else

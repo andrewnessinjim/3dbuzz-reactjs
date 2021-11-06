@@ -7,6 +7,9 @@ import PropTypes from "prop-types";
 import Chat from "./chat";
 
 class LobbyContainer extends ContainerBase {
+	_joinGame: (game: any) => void
+	_sendMessage: (message: string) => void
+
 	constructor(props) {
 		super(props);
 
@@ -52,6 +55,9 @@ class LobbyContainer extends ContainerBase {
 }
 
 class LobbySidebar extends ContainerBase {
+	_login: () => void
+	_createGame: () => void
+
 	constructor(props) {
 		super(props);
 

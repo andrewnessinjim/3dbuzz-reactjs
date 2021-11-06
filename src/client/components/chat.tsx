@@ -13,7 +13,27 @@ import { TextInput } from "./controls";
  * 4. hasFailed
  */
 
+interface Op {
+	can?: boolean,
+	inProgress?: boolean,
+	error?: string,
+	hasFailed?: boolean
+}
+
+interface ChatProps {
+	messages: any;
+	opSendMessage: Op;
+	sendMessage(message: string): void;
+
+}
 export default class Chat extends Component {
+
+	_lastIndex: number;
+	_sendMessage: (React.FormEventHandler<HTMLFormElement>);
+	_text: any;
+	_messages: any;
+	props: ChatProps
+
 	static propTypes = {
 		messages: PropTypes.array.isRequired,
 		opSendMessage: PropTypes.object.isRequired,
