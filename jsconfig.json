@@ -1,8 +1,0 @@
-{
-	"compilerOptions": {
-		"jsx": "react",
-		"target": "ES2021",
-		"moduleResolution": "node"
-	},
-    "include": ["src/**/*"]
-}
