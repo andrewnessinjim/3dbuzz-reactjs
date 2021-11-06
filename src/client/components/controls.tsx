@@ -3,6 +3,9 @@ import "./controls.scss";
 import React, {Component} from "react";
 
 export class TextInput extends Component {
+	input: HTMLInputElement
+	props: {className: string}
+
 	get value() {
 		return this.input.value;
 	}
