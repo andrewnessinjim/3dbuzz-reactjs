@@ -9,9 +9,12 @@ export default class GameStore {
 		this.opCreateGame$ = mapOp$(
 			dispatcher.on$(A.GAME_CREATE),
 			isLoggedIn$);
+		this.opCreateGame$.subscribe(opCreateGame => console.log(`opCreateGame$ log listener: ${JSON.stringify(opCreateGame)}`));
 
 		this.opJoinGame$ = mapOp$(
 			dispatcher.on$(A.GAME_JOIN)
-		)
+		);
+		this.opJoinGame$.subscribe(opJoinGame => console.log(`opJoinGame$ log listener: ${JSON.stringify(opJoinGame)}`));
+
 	}
 }

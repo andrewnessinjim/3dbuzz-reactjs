@@ -51,5 +51,7 @@ export default class LobbyStore {
 			dispatcher.on$(A.LOBBY_SEND_MESSAGE),
 			user.details$.map(u => u.isLoggedIn)
 		);
+
+		this.opSendMessage$.subscribe(opSendMessage => console.log(`opSendMessage$ log listener: ${JSON.stringify(opSendMessage)}`));
 	}
 }

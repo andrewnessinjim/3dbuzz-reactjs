@@ -38,5 +38,6 @@ export default class UserStore {
 			dispatcher.on$(A.USER_LOGIN),
 			this.details$.map(details => !details.isLoggedIn)
 		);
+		this.opLogin$.subscribe(opLogin => console.log(`opLogin$ log listener: ${JSON.stringify(opLogin)}`));
 	}
 }
