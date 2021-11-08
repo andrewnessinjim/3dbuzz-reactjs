@@ -1,6 +1,12 @@
 import {Observable} from "rxjs";
 import * as A from "./actions";
 
+/*
+mapOp$ takes in a sequence of actions that have statuses on them and turns them
+into a sequence of {can, inProgress, error, failed} objects.
+
+Every time we get a new value for can$, the process restarts and we get a new op
+*/
 export function mapOp$(op$, can$ = Observable.of(true)) {
 	const operation$ = op$
 		.startWith({})
