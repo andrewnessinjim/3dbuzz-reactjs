@@ -1,4 +1,6 @@
 export class Validator {
+	_errors: Array<string>
+
 	static fail(error) {
 		const validator = new Validator();
 		validator.push(error);
@@ -10,28 +12,28 @@ export class Validator {
 	}
 
 	get didFail() {
-		return this.errors.length > 0;
+		return this._errors.length > 0;
 	}
 
 	get didSucceed() {
-		return this.errors.length == 0;
+		return this._errors.length == 0;
 	}
 
 	get message() {
-		return this.errors.join(" ");
+		return this._errors.join(" ");
 	}
 
 	constructor() {
-		this.errors = [];
+		this._errors = [];
 	}
 
-	push(error) {
+	push(error:string|Validator) {
 		if (error instanceof Validator) {
-			for (let message of error.errors) {
-				this.errors.push(message);
+			for (let message of error._errors) {
+				this._errors.push(message);
 			}
 		} else {
-			this.errors.push(error);
+			this._errors.push(error);
 		}
 	}
 
