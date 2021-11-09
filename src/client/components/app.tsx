@@ -6,6 +6,9 @@ import PropTypes from 'prop-types';
 import dialogTypes from "./dialogs";
 
 class AppContainer extends ContainerBase {
+	props: {Main, Sidebar}
+	state
+
 	static propTypes = {
 		Main: PropTypes.func.isRequired,
 		Sidebar: PropTypes.func.isRequired

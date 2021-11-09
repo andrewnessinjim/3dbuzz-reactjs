@@ -1,8 +1,13 @@
 import * as A from "../actions";
 import { mapOp$ } from "../../server/shared/observable";
+import { Op } from "../../server/shared/observable";
 
+import { Observable } from "rxjs";
 
 export default class GameStore {
+	opCreateGame$: Observable<Op>
+	opJoinGame$: Observable<Op>
+
 	constructor({dispatcher}, user)	 {
 		const isLoggedIn$ = user.details$.map(d => d.isLoggedIn);
 

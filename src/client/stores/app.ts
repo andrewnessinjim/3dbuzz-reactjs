@@ -2,6 +2,8 @@ import _ from "lodash";
 import * as A from "../actions";
 
 export default class AppStore {
+	dialog$
+
 	constructor({dispatcher}) {
 		this.dialog$ = dispatcher
 			.on$(A.DIALOG_SET)

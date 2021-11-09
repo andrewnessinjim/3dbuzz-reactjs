@@ -13,3 +13,10 @@ export default function(services) {
 		user, game, lobby, app
 	};
 }
+
+export interface Stores {
+	user: UserStore,
+	game: GameStore,
+	lobby: LobbyStore,
+	app: AppStore
+}

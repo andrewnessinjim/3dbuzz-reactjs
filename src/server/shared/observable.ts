@@ -7,7 +7,7 @@ into a sequence of {can, inProgress, error, failed} objects.
 
 Every time we get a new value for can$, the process restarts and we get a new op
 */
-export function mapOp$(op$, can$ = Observable.of(true)) {
+export function mapOp$(op$:Observable<any>, can$ = Observable.of(true)): Observable<Op> {
 	const operation$ = op$
 		.startWith({})
 		.combineLatest(can$)
@@ -28,4 +28,11 @@ export function mapOp$(op$, can$ = Observable.of(true)) {
 
 	operation$.connect();
 	return operation$;
+}
+
+export interface Op {
+	can: boolean,
+	inProgress: boolean,
+	failed: boolean,
+	error?: string
 }

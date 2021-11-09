@@ -3,7 +3,7 @@ import * as A from "../actions";
 import { Observable } from "rxjs"
 import { Validator } from "../../server/shared/validation";
 import { validateMessage } from "../../server/shared/validation/chat";
-import { mapOp$ } from "../../server/shared/observable";
+import { mapOp$, Op } from "../../server/shared/observable";
 
 const defaultView = {
 	messages: [
@@ -24,6 +24,9 @@ const defaultView = {
 }
 
 export default class LobbyStore {
+	view$: Observable<object>
+	opSendMessage$: Observable<Op>
+
 	constructor({dispatcher}, user)	 {
 		this.view$ = Observable.of(defaultView);
 

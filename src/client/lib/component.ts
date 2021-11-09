@@ -1,5 +1,6 @@
 import {Component, Children} from "react";
 import PropTypes from "prop-types";
+import { AppContext } from "../client";
 
 export class StoreProvider extends Component {
 	props: {
@@ -30,6 +31,7 @@ export class StoreProvider extends Component {
 }
 
 export class ContainerBase extends Component {
+	context: AppContext
 	_disposeFunctions: Array<Function>
 
 	static contextTypes = {

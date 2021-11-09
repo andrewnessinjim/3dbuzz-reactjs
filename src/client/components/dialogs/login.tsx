@@ -1,12 +1,18 @@
 import "./login.scss";
 
-import React from "react";
+import React, { FormEventHandler, MouseEventHandler } from "react";
 import * as A from "../../actions";
 
 import { ContainerBase } from "../../lib/component";
 import { TextInput } from "../controls";
+import { Op } from "../../../server/shared/observable";
 
 class LoginDialog extends ContainerBase {
+	_close: MouseEventHandler<HTMLButtonElement>
+	_login: FormEventHandler<HTMLFormElement>
+	state: {opLogin: Op}
+
+	_username
 	constructor(props) {
 		super(props);
 

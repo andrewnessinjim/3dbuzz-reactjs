@@ -1,6 +1,6 @@
-import { BehaviorSubject} from "rxjs";
+import { BehaviorSubject, Observable} from "rxjs";
 import { validateName } from "../../server/shared/validation/user";
-import { mapOp$ } from "../../server/shared/observable";
+import { mapOp$, Op } from "../../server/shared/observable";
 
 import * as A from "../actions";
 
@@ -11,6 +11,9 @@ const defaultDetails = {
 };
 
 export default class UserStore {
+	details$: BehaviorSubject<{isLoggedIn: boolean, id: number, name: string}>
+	opLogin$: Observable<Op>
+
 	constructor({dispatcher}) {
 		this.details$ = new BehaviorSubject(defaultDetails);
 

@@ -5,10 +5,12 @@ import { ContainerBase } from "../lib/component";
 import PropTypes from "prop-types";
 
 import Chat from "./chat";
+import { Op } from "../../server/shared/observable";
 
 class LobbyContainer extends ContainerBase {
 	_joinGame: (game: any) => void
 	_sendMessage: (message: string) => void
+	state
 
 	constructor(props) {
 		super(props);
@@ -42,6 +44,7 @@ class LobbyContainer extends ContainerBase {
 class LobbySidebar extends ContainerBase {
 	_login: () => void
 	_createGame: () => void
+	state: {opLogin: Op, opCreateGame: Op}
 
 	constructor(props) {
 		super(props);

@@ -9,6 +9,10 @@ export interface Action {
 }
 
 export class Dispatcher {
+	_handlers
+	_emitBuffer
+	_inEmit: boolean
+
 	constructor(){
 		this._handlers = {};
 
@@ -61,21 +65,21 @@ export class Dispatcher {
 		return this.on(typeOrCallbacks, callback, A.STATUS_REQUEST);
 	}
 
-	on$(type) {
+	on$(type: string): Observable<Action> {
 		return new Observable(subscriber => {
 			return this.on(type, value => subscriber.next(value));
 		});
 	}
 
-	onRequest$(type: string) {
+	onRequest$(type: string): Observable<Action> {
 		return this.on$(type).filter(action => action.status == A.STATUS_REQUEST);
 	}
 
-	onFail$(type: string) {
+	onFail$(type: string): Observable<Action> {
 		return this.on$(type).filter(action => action.status == A.STATUS_FAIL);
 	}
 
-	onSuccess$(type: string) {
+	onSuccess$(type: string): Observable<Action> {
 		return this.on$(type).filter(action => action.status == A.STATUS_SUCCESS);
 	}
 

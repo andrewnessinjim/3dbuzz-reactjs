@@ -7,7 +7,7 @@ import {BrowserRouter as Router} from "react-router-dom";
 
 import { StoreProvider } from "./lib/component";
 import { Dispatcher } from "../server/shared/dispatcher";
-import createStores from "./stores";
+import createStores, { Stores } from "./stores";
 import * as A from "./actions";
 
 //------------------------------------
@@ -34,6 +34,13 @@ function main() {
 			</Router>
 		</StoreProvider>,
 		document.getElementById("mount"));
+}
+
+export interface AppContext {
+	stores: Stores,
+	services: {
+		dispatcher: Dispatcher
+	}
 }
 
 //------------------------------------
