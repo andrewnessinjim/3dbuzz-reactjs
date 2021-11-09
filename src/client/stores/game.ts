@@ -1,5 +1,5 @@
 import * as A from "../actions";
-import { mapOp$ } from "shared/observable";
+import { mapOp$ } from "../../server/shared/observable";
 
 
 export default class GameStore {

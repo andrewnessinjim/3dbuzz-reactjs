@@ -3,9 +3,6 @@
 		"jsx": "react",
 		"target": "ES2021",
 		"moduleResolution": "node",
-		"paths": {
-			"shared":["./server/shared"]
-		}
 	},
     "include": ["src/**/*"],
 	

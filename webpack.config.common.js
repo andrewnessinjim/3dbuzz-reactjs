@@ -20,10 +20,7 @@ module.exports = {
 		path: path.join(__dirname, "public", "build")
 	},
 	resolve: {
-		extensions: ["", ".js", ".jsx", ".ts", ".tsx"],
-		alias: {
-			shared: path.join(__dirname, "src", "server", "shared")
-		}
+		extensions: ["", ".js", ".jsx", ".ts", ".tsx"]
 	},
 	module: {
 		rules: [

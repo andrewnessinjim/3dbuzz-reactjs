@@ -1,9 +1,9 @@
 import * as A from "../actions";
 
 import { Observable } from "rxjs"
-import { Validator } from "shared/validation";
-import { validateMessage } from "shared/validation/chat";
-import { mapOp$ } from "shared/observable";
+import { Validator } from "../../server/shared/validation";
+import { validateMessage } from "../../server/shared/validation/chat";
+import { mapOp$ } from "../../server/shared/observable";
 
 const defaultView = {
 	messages: [
