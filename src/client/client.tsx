@@ -3,7 +3,7 @@ import "./client.scss";
 import _ from "lodash";
 import React from "react";
 import ReactDOM from "react-dom";
-import {BrowserRouter as Router} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 
 import { StoreProvider } from "./lib/component";
 import { Dispatcher } from "../server/shared/dispatcher";
@@ -29,9 +29,9 @@ function main() {
 	const routes = require("./routes").default();
 	ReactDOM.render(
 		<StoreProvider stores={stores} services={services}>
-			<Router>
+			<BrowserRouter>
 				{routes}
-			</Router>
+			</BrowserRouter>
 		</StoreProvider>,
 		document.getElementById("mount"));
 }
@@ -40,7 +40,8 @@ export interface AppContext {
 	stores: Stores,
 	services: {
 		dispatcher: Dispatcher
-	}
+	},
+	router: any
 }
 
 //------------------------------------

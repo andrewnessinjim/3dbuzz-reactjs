@@ -36,7 +36,8 @@ export class ContainerBase extends Component {
 
 	static contextTypes = {
 		stores: PropTypes.object.isRequired,
-		services: PropTypes.object.isRequired
+		services: PropTypes.object.isRequired,
+		router: PropTypes.object.isRequired
 	};
 
 	constructor(props) {
