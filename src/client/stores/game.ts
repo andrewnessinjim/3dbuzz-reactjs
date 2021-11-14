@@ -10,7 +10,7 @@ import { Op } from "../../server/shared/observable";
 const defaultView = {
 	id: 42,
 	title: "Nelson's Game",
-	step: A.STEP_SETUP,
+	step: A.STEP_DISPOSED,
 	options: {
 		scoreLimit: 5,
 		sets: ["1ed"]
@@ -20,6 +20,12 @@ const defaultView = {
 		{id: 2, name: "LaQuet", score: 1, isCzar: false, isPlaying:true, isWinner: false},
 		{id: 3, name: "Andrew", score: 4, isCzar: true, isPlaying:false, isWinner: false},
 		{id: 4, name: "Nessin", score: 2, isCzar: false, isPlaying:false, isWinner: false}
+	],
+	messages: [
+		{name: "Nelson", messages: "Blegh"},
+		{name: "Nelson", messages: "Blegh"},
+		{name: "Nelson", messages: "Blegh"},
+		{name: "Nelson", messages: "Blegh"}
 	],
 	round: null,
 	timer: null
