@@ -26,7 +26,7 @@ class AppContainer extends ContainerBase {
 			dispatcher.onSuccess$(A.GAME_JOIN),
 			action => {
 				const path = `/game/${action.gameId}`
-				if(router.route.location.pathname === path)
+				if(router.history.location.pathname === path)
 					return;
 
 				router.history.push(path);
@@ -35,7 +35,7 @@ class AppContainer extends ContainerBase {
 		this.subscribe(
 			dispatcher.onSuccess$(A.LOBBY_JOIN),
 			() => {
-				if(router.route.location.pathname==="/")
+				if(router.history.location.pathname === "/")
 					return;
 
 				router.history.push("/");
