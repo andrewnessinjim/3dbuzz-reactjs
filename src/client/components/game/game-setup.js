@@ -71,7 +71,7 @@ export default class GameSetup extends ContainerBase {
 		const error = opStart.error || opSetOptions.error;
 
 		return (
-			<section className={`c-game-settings ${disabled? "disabled": "enabled"}`}>
+			<section className={`c-game-setup ${disabled? "disabled": "enabled"}`}>
 				<h1>
 					Game Options
 					{!error ? null :
@@ -89,7 +89,7 @@ export default class GameSetup extends ContainerBase {
 						<label>Sets:</label>
 						<SetList sets={setList} toggleSet={this._toggleSet}/>
 					</div>
-					<button className="m-button start-hame good" onClick={this._startGame} disabled={disabled}>
+					<button className="m-button start-game good" onClick={this._startGame} disabled={disabled}>
 						Start Game
 					</button>
 				</form>
