@@ -10,7 +10,7 @@ import { Op } from "../../server/shared/observable";
 const defaultView = {
 	id: 42,
 	title: "Nelson's Game",
-	step: A.STEP_SETUP,
+	step: A.STEP_CHOOSE_WHITES,
 	options: {
 		scoreLimit: 5,
 		sets: ["1ed"]
@@ -27,7 +27,19 @@ const defaultView = {
 		{index: 3, name: "Nelson", messages: "Blegh"},
 		{index: 4, name: "Nelson", messages: "Blegh"}
 	],
-	round: null,
+	round: {
+		blackCard: {
+			id: 1,
+			text: "Does something do something?",
+			set: "1ed",
+			whiteCardCount: 1
+		},
+		stacks: [
+			{id: 1, count: 3},
+			{id: 2, count: 1},
+			{id: 3, count: 2}
+		]
+	}, //list of stacks for all players
 	timer: null
 };
 
@@ -35,7 +47,21 @@ const defaultView = {
 const defaultPlayerView = {
 	id: 1,
 	hand: [], //currently in hand
-	stack: null //currently played
+	stack: {
+		id:2,
+		cards: [
+			{id: 2, text: "Card 1", set: "1ed"},
+			{id: 3, text: "Card 2", set: "1ed"},
+			{id: 4, text: "Card 3", set: "1ed"},
+			{id: 5, text: "Card 4", set: "1ed"},
+			{id: 6, text: "Card 5", set: "1ed"},
+			{id: 7, text: "Card 6", set: "1ed"},
+			{id: 8, text: "Card 7", set: "1ed"},
+			{id: 9, text: "Card 8", set: "1ed"},
+			{id: 10, text: "Card 9", set: "1ed"},
+			{id: 11, text: "Card10", set: "1ed"},
+		]
+	} //currently played
 }
 
 export default class GameStore {
