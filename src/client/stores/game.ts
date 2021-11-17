@@ -10,7 +10,7 @@ import { Op } from "../../server/shared/observable";
 const defaultView = {
 	id: 42,
 	title: "Nelson's Game",
-	step: A.STEP_CHOOSE_WHITES,
+	step: A.STEP_JUDGE_STACKS,
 	options: {
 		scoreLimit: 5,
 		sets: ["1ed"]
@@ -35,9 +35,9 @@ const defaultView = {
 			whiteCardCount: 3
 		},
 		stacks: [
-			{id: 1, count: 3},
-			{id: 2, count: 1},
-			{id: 3, count: 2}
+			{id: 1, cards: [{id: 1, text: "Hey There", set: "whoa"}]},
+			{id: 2, cards: [{id: 2, text: "Stuff and things", set: "whoa"}, {id: 4, text: "Multi Select", set: "whoa"}]},
+			{id: 3, cards: [{id: 3, text: "Blegh", set: "whoa"}]}
 		]
 	}, //list of stacks for all players
 	timer: null
