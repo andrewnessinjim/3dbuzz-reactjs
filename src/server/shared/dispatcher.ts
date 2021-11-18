@@ -5,7 +5,10 @@ import * as A from "./actions";
 
 export interface Action {
 	type: string,
-	status?: string
+	status?: string,
+	details?: {
+		isLoggedIn?: boolean, id?: number, name?: string
+	}
 }
 
 export class Dispatcher {

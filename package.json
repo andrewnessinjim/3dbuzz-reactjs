@@ -18,6 +18,7 @@
     "@babel/register": "^7.16.0",
     "@types/lodash": "^4.14.177",
     "@types/react": "^17.0.34",
+    "@types/socket.io-client": "^3.0.0",
     "babel-loader": "^8.2.3",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.5.0",

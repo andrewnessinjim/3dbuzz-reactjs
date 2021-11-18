@@ -1,8 +1,9 @@
-import { BehaviorSubject, Observable} from "rxjs";
+import { BehaviorSubject, ConnectableObservable, Observable} from "rxjs";
 import { validateName } from "../../server/shared/validation/user";
 import { mapOp$, Op } from "../../server/shared/observable";
 
 import * as A from "../actions";
+import { Dispatcher } from "../../server/shared/dispatcher";
 
 const defaultDetails = {
 	isLoggedIn: false,
@@ -11,11 +12,16 @@ const defaultDetails = {
 };
 
 export default class UserStore {
-	details$: BehaviorSubject<{isLoggedIn: boolean, id: number, name: string}>
+	details$: ConnectableObservable<{isLoggedIn?: boolean, id?: number, name?: string}>
 	opLogin$: Observable<Op>
 
-	constructor({dispatcher}) {
-		this.details$ = new BehaviorSubject(defaultDetails);
+	constructor({dispatcher, socket}:{dispatcher: Dispatcher, socket: any}) {
+		this.details$ = dispatcher.on$(A.USER_DETAILS_SET)
+		.map(a => a.details)
+		.startWith(defaultDetails)
+		.publishReplay(1);
+
+		this.details$.connect();
 
 		this.details$.subscribe(details =>
 			Object.keys(details).forEach(k => this[k] = details[k]));
@@ -28,13 +34,7 @@ export default class UserStore {
 					return;
 				}
 
-				//Pretend successful login
-				dispatcher.succeed(action);
-				this.details$.next({
-					isLoggedIn: true,
-					id: 4432,
-					name: action.name
-				}); 
+				socket.emit("action", action);
 			}
 		});
 
