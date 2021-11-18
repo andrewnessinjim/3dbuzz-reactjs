@@ -4,6 +4,7 @@ import _ from "lodash";
 import React from "react";
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
+import io from "socket.io-client";
 
 import { StoreProvider } from "./lib/component";
 import { Dispatcher } from "../server/shared/dispatcher";
@@ -13,11 +14,14 @@ import * as A from "./actions";
 //------------------------------------
 // Services
 const dispatcher = new Dispatcher();
-const services = {dispatcher};
+const socket = io();
+const services = {dispatcher, socket};
 
 if(IS_DEVELOPMENT) {
 	dispatcher.on("*", printAction);
 }
+
+socket.on("action", action => dispatcher.emit(action));
 
 //------------------------------------
 // Stores
