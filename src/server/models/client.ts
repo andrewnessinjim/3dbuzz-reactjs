@@ -19,7 +19,7 @@ export class Client extends Dispatcher {
 		};
 	}
 
-	constructor(socket, app) {
+	constructor(socket, app:Application) {
 		super();
 		this.id = socket.id;
 		this.isLoggedIn = false;
