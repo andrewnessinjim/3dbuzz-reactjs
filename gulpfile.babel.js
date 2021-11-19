@@ -7,7 +7,6 @@ import chalk from "chalk";
 import webpackProdConfig from "./webpack.config.prod";
 import webpackDevConfig from "./webpack.config.dev";
 import { webpack } from "webpack";
-import WebpackDevServer from "webpack-dev-server";
 
 const $ = require("gulp-load-plugins")();
 
@@ -131,6 +130,7 @@ function buildClient(done) {
 }
 
 function watchClient() {
+	const WebpackDevServer = require("webpack-dev-server");
 	const compiler = webpack(webpackDevConfig);
 	const server = new WebpackDevServer({
 		hot: true,
