@@ -1,7 +1,7 @@
 import _ from "lodash";
 import {shuffle} from "../shared/utils";
 
-const PLACEHOLDER_REGEX= /\{\}/;
+const PLACEHOLDER_REGEX= /\{\}/g;
 
 function getWhiteCardCount(text: string): number {
 	const match = text.match(PLACEHOLDER_REGEX);

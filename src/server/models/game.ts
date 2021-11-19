@@ -158,7 +158,7 @@ export class Game extends RoomBase {
 			player.onRoundStart();
 	}
 
-	/* _postTick() {
+	_postTick() {
 		if (!this.isDisposed && this.step != A.STEP_WAIT && this.step != A.STEP_SETUP) {
 			if (this.players.length < MINIMUM_PLAYERS)
 				this._transitionStep(A.WAIT_GAME_OVER, A.WAIT_REASON_TOO_FEW_PLAYERS);
@@ -212,7 +212,7 @@ export class Game extends RoomBase {
 				}
 			});
 		}, 5000);
-	} */
+	}
 
 	dispose() {
 		if (this.step == A.STEP_DISPOSED)
