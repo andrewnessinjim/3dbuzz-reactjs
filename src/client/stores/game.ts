@@ -4,65 +4,25 @@ import _ from "lodash";
 import * as A from "../actions";
 import { mapOp$ } from "../../server/shared/observable";
 import { Op } from "../../server/shared/observable";
-
+import { createView$ } from "../lib/stores";
 
 //State shared by all players
 const defaultView = {
-	id: 42,
-	title: "Nelson's Game",
-	step: A.STEP_SETUP,
-	options: {
-		scoreLimit: 5,
-		sets: ["1ed"]
-	},
-	players: [
-		{id: 1, name: "Nelson", score: 3, isCzar: false, isPlaying:true, isWinner: false},
-		{id: 2, name: "LaQuet", score: 1, isCzar: false, isPlaying:true, isWinner: false},
-		{id: 3, name: "Andrew", score: 4, isCzar: true, isPlaying:false, isWinner: false},
-		{id: 4, name: "Nessin", score: 2, isCzar: false, isPlaying:false, isWinner: false}
-	],
-	messages: [
-		{index: 1, name: "Nelson", messages: "Blegh"},
-		{index: 2, name: "Nelson", messages: "Blegh"},
-		{index: 3, name: "Nelson", messages: "Blegh"},
-		{index: 4, name: "Nelson", messages: "Blegh"}
-	],
-	round: {
-		blackCard: {
-			id: 1,
-			text: "Does something do something?",
-			set: "1ed",
-			whiteCardCount: 3
-		},
-		stacks: [
-			{id: 1, cards: [{id: 1, text: "Hey There", set: "whoa"}]},
-			{id: 2, cards: [{id: 2, text: "Stuff and things", set: "whoa"}, {id: 4, text: "Multi Select", set: "whoa"}]},
-			{id: 3, cards: [{id: 3, text: "Blegh", set: "whoa"}]}
-		]
-	}, //list of stacks for all players
+	id: null,
+	title: null,
+	step: A.STEP_DISPOSED,
+	options: {},
+	players: [],
+	messages: [],
+	round: null,
 	timer: null
 };
 
 //State private to each individual player (the player's hand)
 const defaultPlayerView = {
-	id: 1,
-	hand: [
-		{id: 2, text: "Card 1", set: "1ed"},
-		{id: 3, text: "Card 2", set: "1ed"},
-		{id: 4, text: "Card 3", set: "1ed"},
-		{id: 5, text: "Card 4", set: "1ed"},
-		{id: 7, text: "Card 6", set: "1ed"},
-		{id: 8, text: "Card 7", set: "1ed"},
-		{id: 9, text: "Card 8", set: "1ed"},
-		{id: 10, text: "Card 9", set: "1ed"},
-		{id: 11, text: "Card10", set: "1ed"}
-	], //currently in hand
-	stack: {
-		id:2,
-		cards: [
-			{id: 6, text: "Card 5", set: "1ed"}
-		]
-	} //currently played
+	id: null,
+	hand: [],
+	stack: null
 }
 
 export default class GameStore {
@@ -76,23 +36,20 @@ export default class GameStore {
 	view$: Observable<{step:string, players: Array<object>}>
 	player$: Observable<{id: number}>
 
-	constructor({dispatcher}, user)	 {
+	constructor({dispatcher, socket}, user)	 {
+		const passThroughAction = action => socket.emit("action", action);
 		dispatcher.onRequest({
-			[A.GAME_CREATE]: action => {
-				//Sequence of events we receive from the server when we create a game
-				dispatcher.succeed(action);
-				dispatcher.succeed(A.gameJoin(42));
-			},
-			[A.GAME_JOIN]: action => dispatcher.succeed(action),
-			[A.GAME_SET_OPTIONS]: action => dispatcher.succeed(action),
-			[A.GAME_START]: action => dispatcher.succeed(action),
-			[A.GAME_SELECT_CARD]: action => dispatcher.succeed(action),
-			[A.GAME_SELECT_STACK]: action => dispatcher.succeed(action),
-			[A.GAME_SEND_MESSAGE]: action => dispatcher.succeed(action),
+			[A.GAME_CREATE]: passThroughAction,
+			[A.GAME_JOIN]: passThroughAction,
+			[A.GAME_SET_OPTIONS]: passThroughAction,
+			[A.GAME_START]: passThroughAction,
+			[A.GAME_SELECT_CARD]: passThroughAction,
+			[A.GAME_SELECT_STACK]: passThroughAction,
+			[A.GAME_SEND_MESSAGE]: passThroughAction,
 		});
 
-		this.view$ = new BehaviorSubject(defaultView);
-		this.player$ = new BehaviorSubject(defaultPlayerView);
+		this.view$ = createView$(dispatcher, A.VIEW_GAME, defaultView)
+		this.player$ = createView$(dispatcher, A.VIEW_PLAYER, defaultPlayerView);
 
 		const isLoggedIn$ = user.details$.map(d => d.isLoggedIn);
 
@@ -134,10 +91,5 @@ export default class GameStore {
 			dispatcher.on$(A.GAME_SEND_MESSAGE),
 			isLoggedIn$
 		);
-
-		//Logging only
-		this.opCreateGame$.subscribe(opCreateGame => console.log(`opCreateGame$ log listener: ${JSON.stringify(opCreateGame)}`));
-		this.opJoinGame$.subscribe(opJoinGame => console.log(`opJoinGame$ log listener: ${JSON.stringify(opJoinGame)}`));
-
 	}
 }

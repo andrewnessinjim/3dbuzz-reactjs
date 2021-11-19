@@ -117,7 +117,7 @@ export class Dispatcher {
 		this.emit(A.request(action));
 	}
 
-	fail(action: Action, error) {
+	fail(action: Action, error?) {
 		this.emit(A.fail(action, error));
 	}
 
